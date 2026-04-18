@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Free Class — Camecorn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+/* ============ JOIN PAGE — REGISTRATION ============ */
+.join-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 74px;
+}
+
+/* LEFT PANEL */
+.join-left {
+  background: var(--bg-2);
+  border-right: 1px solid var(--border-soft);
+  padding: 80px 72px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.join-left::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(155,137,179,0.13) 0%, rgba(176,122,69,0.07) 45%, transparent 70%);
+  pointer-events: none;
+}
+.join-left::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -40px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(176,122,69,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+.join-left-inner { position: relative; z-index: 1; }
+.join-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-lav);
+  margin-bottom: 24px;
+  display: block;
+}
+.join-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 900;
+  color: var(--fg);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+.join-heading em { color: var(--accent); font-style: italic; }
+.join-subtext {
+  font-size: 0.97rem;
+  color: var(--text);
+  line-height: 1.85;
+  max-width: 380px;
+  margin-bottom: 52px;
+}
+
+/* BENEFITS LIST */
+.join-benefits { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; }
+.join-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.join-benefit-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--lav-glow);
+  border: 1px solid var(--lav-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  color: var(--accent-lav);
+}
+.join-benefit-text strong {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 2px;
+}
+.join-benefit-text span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* TRUST BADGE */
+.join-trust {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  max-width: 360px;
+}
+.join-trust-avatars {
+  display: flex;
+}
+.join-trust-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: -8px;
+  flex-shrink: 0;
+}
+.join-trust-avatar:first-child { margin-left: 0; }
+.join-trust-avatar:nth-child(1) { background: linear-gradient(135deg, var(--accent), var(--accent-alt)); }
+.join-trust-avatar:nth-child(2) { background: linear-gradient(135deg, var(--accent-lav), var(--accent-mauve)); }
+.join-trust-avatar:nth-child(3) { background: linear-gradient(135deg, var(--accent-slate), var(--accent-lav)); }
+.join-trust-avatar:nth-child(4) { background: linear-gradient(135deg, var(--accent-mauve), var(--accent-alt)); }
+.join-trust-copy { font-size: 0.8rem; color: var(--text); line-height: 1.5; }
+.join-trust-copy strong { font-weight: 600; color: var(--fg); display: block; }
+
+/* Watermark */
+.join-left-watermark {
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 140px);
+  font-weight: 900;
+  color: var(--accent-lav);
+  opacity: 0.04;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+/* RIGHT PANEL — FORM */
+.join-right {
+  background: var(--bg);
+  padding: 80px 80px 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.join-form-header {
+  margin-bottom: 44px;
+}
+.join-form-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.join-form-header p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* FORM ELEMENTS */
+.join-form { display: flex; flex-direction: column; gap: 22px; max-width: 480px; }
+
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.form-label .required {
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--fg);
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-sm);
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--text-muted); font-size: 0.875rem; }
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--lav-border);
+  background: var(--bg);
+  box-shadow: 0 0 0 3px rgba(155,137,179,0.10);
+}
+
+/* Custom select wrapper */
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--text-muted);
+  pointer-events: none;
+  transition: border-color 0.25s;
+}
+.select-wrap:focus-within::after { border-top-color: var(--accent-lav); }
+.form-select { cursor: pointer; padding-right: 42px; }
+.form-select option { background: var(--bg-2); color: var(--fg); }
+
+.form-textarea { min-height: 100px; resize: vertical; line-height: 1.7; }
+
+/* PHONE with country code */
+.phone-wrap { display: flex; gap: 10px; }
+.phone-prefix {
+  width: 100px;
+  flex-shrink: 0;
+}
+.phone-prefix .form-select { border-right: none; border-radius: var(--r-sm); }
+.phone-number { flex: 1; }
+
+/* CHECKBOX */
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-lav);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.form-check-label {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.65;
+}
+.form-check-label a { color: var(--accent-lav); text-decoration: underline; text-decoration-style: dotted; }
+
+/* DIVIDER */
+.form-section-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0;
+}
+.form-section-divider::before,
+.form-section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.form-section-divider span {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* SUBMIT BUTTON */
+.join-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 18px 36px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  width: 100%;
+  margin-top: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.join-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%);
+  background-size: 200% 100%;
+  transition: background-position 0.6s ease;
+  background-position: 100% 0;
+}
+.join-submit:hover { background: #9a6839; box-shadow: 0 8px 32px rgba(176,122,69,0.35); transform: translateY(-1px); }
+.join-submit:hover::before { background-position: -100% 0; }
+.join-submit:active { transform: translateY(0); }
+.join-submit svg { flex-shrink: 0; }
+
+/* PROGRESS STEPS */
+.form-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 40px;
+}
+.form-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.form-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.form-step.active .form-step-num {
+  background: var(--accent-lav);
+  color: #fff;
+  border: 1px solid var(--accent-lav);
+}
+.form-step.done .form-step-num {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+.form-step.pending .form-step-num {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+}
+.form-step-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.form-step.active .form-step-label { color: var(--accent-lav); }
+.form-step-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-soft);
+  margin: 0 8px;
+}
+
+/* FIELD HINT */
+.form-hint {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* BACK TO HOME link */
+.join-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  transition: color 0.25s;
+}
+.join-back:hover { color: var(--accent-lav); }
+.join-back svg { transition: transform 0.25s; }
+.join-back:hover svg { transform: translateX(-3px); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 960px) {
+  .join-hero { grid-template-columns: 1fr; min-height: auto; }
+  .join-left {
+    padding: 100px 40px 60px;
+    min-height: auto;
+  }
+  .join-right { padding: 60px 40px 80px; }
+  .join-form { max-width: 100%; }
+  .join-left-watermark { display: none; }
+}
+@media (max-width: 600px) {
+  .join-left { padding: 100px 24px 52px; }
+  .join-right { padding: 52px 24px 80px; }
+  .form-row { grid-template-columns: 1fr; }
+  .join-heading { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container nav">
+    <a href="index.html" class="logo-wrap">
+      <img src="hero-image.png" alt="Camecorn" class="logo-img">
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#hero" class="nav-link">Home</a>
+      <a href="index.html#offerings" class="nav-link">Services</a>
+      <a href="index.html#services" class="nav-link">Offerings</a>
+      
+      <a href="about.html" class="nav-link">About</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      
+
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#hero">Home</a>
+  <a href="index.html#offerings">Services</a>
+  <a href="index.html#services">Offerings</a>
+  
+  <a href="about.html">About</a>
+  <a href="resources.html">Resources</a>
+  <a href="join.html" >Join Community</a>
+</div>
+
+<!-- JOIN HERO -->
+<main class="join-hero">
+
+  <!-- LEFT PANEL -->
+  <div class="join-left">
+    <div class="join-left-watermark">AI</div>
+    <div class="join-left-inner">
+
+      <a href="index.html" class="join-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Home
+      </a>
+
+      <span class="join-label">Join Community for free</span>
+      <h1 class="join-heading">
+        Your AI journey<br>starts <em>right here.</em>
+      </h1>
+      <p class="join-subtext">
+        Register in under two minutes and become a part of a growing Community of Vibrant Business owners scaling their businesses using Artifiial Intellegence.
+      </p>
+
+      <div class="join-benefits">
+        <div class="join-benefit">
+          <div class="join-benefit-icon">◈</div>
+          <div class="join-benefit-text">
+            <strong>Access to Free Classes and Trainings as Member</strong>
+            <span>No payment, no hidden fees. Just real AI education that keeps you ahead in the marketplace</span>
+          </div>
+        </div>
+        <div class="join-benefit">
+          <div class="join-benefit-icon">◉</div>
+          <div class="join-benefit-text">
+            <strong>Built for African Business Owners</strong>
+            <span>Africans are usually made to only catch up with market trends and hence, late adopters. But in the community, You stay updated on AI news, Trends and tools for businesses</span>
+          </div>
+        </div>
+        <div class="join-benefit">
+          <div class="join-benefit-icon">◎</div>
+          <div class="join-benefit-text">
+            <strong>Strong Community Support</strong>
+            <span>With the community suport that exist within Camecorn,you are never left on your own. </span>
+          </div>
+        </div>
+        <div class="join-benefit">
+          <div class="join-benefit-icon">⊕</div>
+          <div class="join-benefit-text">
+            <strong>Live, Interactive Sessions</strong>
+            <span>Ask questions, get real answers, and learn alongside other entrepreneurs.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="join-trust">
+        <div class="join-trust-avatars">
+          <div class="join-trust-avatar">AO</div>
+          <div class="join-trust-avatar">KM</div>
+          <div class="join-trust-avatar">FN</div>
+          <div class="join-trust-avatar">+</div>
+        </div>
+        <div class="join-trust-copy">
+          <strong>Join a growing community</strong>
+          African entrepreneurs already building smarter with AI.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — FORM -->
+  <div class="join-right">
+
+    <div class="join-form-header">
+      
+      <h2>Tell us about yourself</h2>
+      <p>Fill in the details below and we'll get you set up for the next free class.</p>
+    </div>
+
+    <div class="join-form" id="joinForm">
+
+      <!-- Full Name -->
+      <div class="form-group">
+        <label class="form-label" for="fullName">
+          Full Name <span class="required">*</span>
+        </label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          class="form-input"
+          placeholder="e.g. Adaeze Okonkwo"
+          required
+          autocomplete="name"
+        >
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="email">
+          Email Address <span class="required">*</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-input"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+        >
+        <span class="form-hint">We'll send your class details and access link here.</span>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label class="form-label" for="phone">
+          WhatsApp / Phone Number
+        </label>
+        <div class="phone-wrap">
+          <div class="phone-prefix select-wrap">
+            <select class="form-select" name="phoneCode" id="phoneCode">
+              <option value="+234">🇳🇬 +234</option>
+              <option value="+233">🇬🇭 +233</option>
+              <option value="+254">🇰🇪 +254</option>
+              <option value="+27">🇿🇦 +27</option>
+              <option value="+255">🇹🇿 +255</option>
+              <option value="+256">🇺🇬 +256</option>
+              <option value="+237">🇨🇲 +237</option>
+              <option value="+225">🇨🇮 +225</option>
+              <option value="+221">🇸🇳 +221</option>
+              <option value="+251">🇪🇹 +251</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+20">🇪🇬 +20</option>
+              <option value="+1">🌍 +1</option>
+              <option value="+44">🌍 +44</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="phone-number">
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              placeholder="080 0000 0000"
+              autocomplete="tel"
+            >
+          </div>
+        </div>
+        <span class="form-hint">Optional — we may send class reminders via WhatsApp.</span>
+      </div>
+
+      <div class="form-section-divider">
+        <span>About Your Business</span>
+      </div>
+
+      <!-- Business Name -->
+      <div class="form-group">
+        <label class="form-label" for="businessName">
+          Business / Organisation Name <span class="required">*</span>
+        </label>
+        <input
+          type="text"
+          id="businessName"
+          name="businessName"
+          class="form-input"
+          placeholder="e.g. LagosStyle Co."
+          required
+        >
+      </div>
+
+      <!-- Business Category -->
+      <div class="form-group">
+        <label class="form-label" for="businessCategory">
+          Business Category <span class="required">*</span>
+        </label>
+        <div class="select-wrap">
+          <select id="businessCategory" name="businessCategory" class="form-select" required>
+            <option value="" disabled selected>Select your industry…</option>
+            <optgroup label="Commerce &amp; Retail">
+              <option value="retail">Retail &amp; E-commerce</option>
+              <option value="fmcg">FMCG / Consumer Goods</option>
+              <option value="fashion">Fashion &amp; Apparel</option>
+              <option value="beauty">Beauty &amp; Cosmetics</option>
+              <option value="food-bev">Food &amp; Beverages</option>
+              <option value="supermarket">Supermarket / Grocery</option>
+            </optgroup>
+            <optgroup label="Professional Services">
+              <option value="consulting">Consulting &amp; Advisory</option>
+              <option value="legal">Legal Services</option>
+              <option value="accounting">Accounting &amp; Finance</option>
+              <option value="hr">HR &amp; Recruitment</option>
+              <option value="marketing">Marketing &amp; Advertising</option>
+              <option value="pr">PR &amp; Communications</option>
+            </optgroup>
+            <optgroup label="Technology">
+              <option value="tech-startup">Tech Startup</option>
+              <option value="software">Software / SaaS</option>
+              <option value="it-services">IT Services &amp; Support</option>
+              <option value="fintech">Fintech</option>
+              <option value="edtech">Edtech</option>
+              <option value="healthtech">Healthtech</option>
+            </optgroup>
+            <optgroup label="Creative &amp; Media">
+              <option value="creative-agency">Creative Agency</option>
+              <option value="content">Content Creation</option>
+              <option value="photography">Photography &amp; Videography</option>
+              <option value="design">Graphic Design &amp; Branding</option>
+              <option value="media">Media &amp; Publishing</option>
+              <option value="music">Music &amp; Entertainment</option>
+            </optgroup>
+            <optgroup label="Education &amp; Training">
+              <option value="school">School / Academy</option>
+              <option value="coaching">Coaching &amp; Mentoring</option>
+              <option value="training">Corporate Training</option>
+              <option value="elearning">E-learning</option>
+            </optgroup>
+            <optgroup label="Health &amp; Wellness">
+              <option value="healthcare">Healthcare / Clinic</option>
+              <option value="pharmacy">Pharmacy</option>
+              <option value="fitness">Fitness &amp; Wellness</option>
+              <option value="mental-health">Mental Health Services</option>
+            </optgroup>
+            <optgroup label="Real Estate &amp; Construction">
+              <option value="real-estate">Real Estate</option>
+              <option value="construction">Construction &amp; Engineering</option>
+              <option value="architecture">Architecture &amp; Interior Design</option>
+              <option value="property-mgmt">Property Management</option>
+            </optgroup>
+            <optgroup label="Logistics &amp; Manufacturing">
+              <option value="logistics">Logistics &amp; Supply Chain</option>
+              <option value="transport">Transport &amp; Ride-hailing</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="agriculture">Agriculture &amp; Agribusiness</option>
+            </optgroup>
+            <optgroup label="Hospitality &amp; Tourism">
+              <option value="hotel">Hotel &amp; Accommodation</option>
+              <option value="restaurant">Restaurant &amp; Catering</option>
+              <option value="travel">Travel &amp; Tourism</option>
+              <option value="events">Events &amp; Entertainment</option>
+            </optgroup>
+            <optgroup label="Non-profit &amp; Government">
+              <option value="ngo">NGO / Non-profit</option>
+              <option value="social-enterprise">Social Enterprise</option>
+              <option value="government">Government / Public Sector</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="freelancer">Freelancer / Solo Professional</option>
+              <option value="other">Other (please specify below)</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <!-- Other Business Category (shown conditionally) -->
+      <div class="form-group" id="otherCategoryGroup" style="display:none;">
+        <label class="form-label" for="otherCategory">Specify Your Industry</label>
+        <input
+          type="text"
+          id="otherCategory"
+          name="otherCategory"
+          class="form-input"
+          placeholder="Describe your business category…"
+        >
+      </div>
+
+      <!-- Position / Role -->
+      <div class="form-group">
+        <label class="form-label" for="position">
+          Your Role / Position <span class="required">*</span>
+        </label>
+        <div class="select-wrap">
+          <select id="position" name="position" class="form-select" required>
+            <option value="" disabled selected>Select your role…</option>
+            <optgroup label="Leadership">
+              <option value="founder-ceo">Founder / CEO</option>
+              <option value="co-founder">Co-founder</option>
+              <option value="managing-director">Managing Director</option>
+              <option value="coo">COO / Operations Lead</option>
+              <option value="cto">CTO / Tech Lead</option>
+              <option value="cmo">CMO / Marketing Lead</option>
+              <option value="cfo">CFO / Finance Lead</option>
+            </optgroup>
+            <optgroup label="Management">
+              <option value="general-manager">General Manager</option>
+              <option value="operations-manager">Operations Manager</option>
+              <option value="marketing-manager">Marketing Manager</option>
+              <option value="sales-manager">Sales Manager</option>
+              <option value="product-manager">Product Manager</option>
+              <option value="project-manager">Project Manager</option>
+              <option value="hr-manager">HR Manager</option>
+            </optgroup>
+            <optgroup label="Specialist / Team Member">
+              <option value="developer">Developer / Engineer</option>
+              <option value="designer">Designer</option>
+              <option value="content-creator">Content Creator</option>
+              <option value="data-analyst">Data Analyst</option>
+              <option value="sales-rep">Sales Representative</option>
+              <option value="customer-service">Customer Service</option>
+              <option value="accountant">Accountant / Finance Officer</option>
+              <option value="social-media">Social Media Manager</option>
+            </optgroup>
+            <optgroup label="Independent">
+              <option value="freelancer">Freelancer / Consultant</option>
+              <option value="self-employed">Self-employed</option>
+              <option value="student">Student / Recent Graduate</option>
+            </optgroup>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      
+
+      <!-- AI Experience -->
+      <div class="form-group">
+        <label class="form-label" for="aiExperience">
+          Current AI Experience
+        </label>
+        <div class="select-wrap">
+          <select id="aiExperience" name="aiExperience" class="form-select">
+            <option value="" disabled selected>Where are you starting from?</option>
+            <option value="none">No experience — complete beginner</option>
+            <option value="curious">I've heard about it but never tried</option>
+            <option value="basic">I've used ChatGPT or similar tools casually</option>
+            <option value="intermediate">I use AI tools regularly in my work</option>
+            <option value="advanced">I build with AI / automate workflows</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Goal / How can we help -->
+      <div class="form-group">
+        <label class="form-label" for="goal">
+          What do you want to achieve with AI?
+        </label>
+        <textarea
+          id="goal"
+          name="goal"
+          class="form-textarea"
+          placeholder="e.g. Automate my customer follow-ups, build a website, understand AI tools for my industry, train my team…"
+        ></textarea>
+        <span class="form-hint">This helps us tailor the class content to what matters most to you.</span>
+      </div>
+
+      <!-- How did you hear -->
+      <div class="form-group">
+        <label class="form-label" for="referral">
+          How did you hear about us?
+        </label>
+        <div class="select-wrap">
+          <select id="referral" name="referral" class="form-select">
+            <option value="" disabled selected>Select one…</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter / X</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="tiktok">TikTok</option>
+            <option value="youtube">YouTube</option>
+            <option value="whatsapp">WhatsApp / Group</option>
+            <option value="friend">Friend / Colleague Referral</option>
+            <option value="google">Google Search</option>
+            <option value="event">Event / Conference</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      
+
+      <!-- SUBMIT -->
+      <button type="button" class="join-submit" id="joinSubmit" onclick="handleSubmit()">
+        Join Community
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="hero-image.png" alt="Camecorn" style="width:44px;opacity:0.85;">
+      <span class="logo-text">Camecorn</span>
+      <p>Empowering African businesses with AI-powered solutions, skills, and education.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <strong>Company</strong>
+        <a href="about.html">About Us</a>
+        <a href="#">Our Team</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <strong>Services</strong>
+        <a href="index.html#services">AI Education</a>
+        <a href="index.html#services">AI Training</a>
+        <a href="index.html#services">AI Solutions</a>
+        <a href="#">Consulting</a>
+      </div>
+      <div class="footer-col">
+        <strong>Connect</strong>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter / X</a>
+        <a href="resources.html">YouTube Classes</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <p>© 2026 Camecorn. All rights reserved.</p>
+    <p>Built with ❤ for Africa.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  /* ——— Show/hide "Other" category field ——— */
+  const categorySelect = document.getElementById('businessCategory');
+  const otherGroup = document.getElementById('otherCategoryGroup');
+  categorySelect && categorySelect.addEventListener('change', () => {
+    otherGroup.style.display = categorySelect.value === 'other' ? '' : 'none';
+  });
+
+  /* ——— Form submission — redirect to thank-you page ——— */
+  function handleSubmit() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const businessName = document.getElementById('businessName').value.trim();
+    const businessCategory = document.getElementById('businessCategory').value;
+    const position = document.getElementById('position').value;
+    const consent = document.getElementById('consent').checked;
+
+    // Basic validation
+    if (!fullName) { alert('Please enter your full name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    if (!businessName) { alert('Please enter your business name.'); return; }
+    if (!businessCategory) { alert('Please select your business category.'); return; }
+    if (!position) { alert('Please select your role / position.'); return; }
+    if (!consent) { alert('Please agree to the terms to continue.'); return; }
+
+    // Redirect to thank-you page (to be built)
+    window.location.href = 'thankyou.html';
+  }
+</script>
+</body>
+</html>
